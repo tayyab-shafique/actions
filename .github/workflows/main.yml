@@ -3,7 +3,7 @@ name: Push to Specific Branch
 on:
   push:
     branches:
-      - tyb/new  # Change this to your source branch
+      - tyb/new
 
 jobs:
   push_to_branch:
@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.before }} # This ensures that the 'before' commit is checked out
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
 
       - name: Push to Specific Branch
         run: |
