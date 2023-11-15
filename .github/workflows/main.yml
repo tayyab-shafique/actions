@@ -1,0 +1,22 @@
+name: Push to Specific Branch
+
+on:
+  push:
+    branches:
+      - tyb/new  # Change this to your source branch
+
+jobs:
+  push_to_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Push to Specific Branch
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+          # Replace 'main' with your target branch
+          git push origin HEAD:master
